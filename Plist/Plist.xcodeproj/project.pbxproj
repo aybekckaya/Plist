@@ -22,6 +22,9 @@
 		A31396B51F5F066E005967CA /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* Plist.swift */; };
 		A31396B61F5F066E005967CA /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* Plist.swift */; };
 		A31396B71F5F066E005967CA /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* Plist.swift */; };
+		A358F0B11F65617F00B1CFB5 /* sampleListFromBundle.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */; };
+		A358F0B21F65618000B1CFB5 /* sampleListFromBundle.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */; };
+		A358F0B31F65618000B1CFB5 /* sampleListFromBundle.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,7 @@
 		A31396AB1F5F05E6005967CA /* IndexVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexVC.swift; sourceTree = "<group>"; };
 		A31396AC1F5F05E6005967CA /* IndexVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexVC.xib; sourceTree = "<group>"; };
 		A31396B41F5F066E005967CA /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
+		A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = sampleListFromBundle.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		A31396771F5F0574005967CA /* Plist */ = {
 			isa = PBXGroup;
 			children = (
+				A31396B81F5F2DA8005967CA /* PlistSamples */,
 				A31396B31F5F0647005967CA /* Plist */,
 				A31396A91F5F05C2005967CA /* ViewControllers */,
 				A31396781F5F0574005967CA /* AppDelegate.swift */,
@@ -159,6 +164,14 @@
 				A31396B41F5F066E005967CA /* Plist.swift */,
 			);
 			path = Plist;
+			sourceTree = "<group>";
+		};
+		A31396B81F5F2DA8005967CA /* PlistSamples */ = {
+			isa = PBXGroup;
+			children = (
+				A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */,
+			);
+			path = PlistSamples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A358F0B11F65617F00B1CFB5 /* sampleListFromBundle.plist in Resources */,
 				A31396861F5F0574005967CA /* LaunchScreen.storyboard in Resources */,
 				A31396831F5F0574005967CA /* Assets.xcassets in Resources */,
 				A31396B01F5F05E6005967CA /* IndexVC.xib in Resources */,
@@ -278,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A358F0B21F65618000B1CFB5 /* sampleListFromBundle.plist in Resources */,
 				A31396B11F5F05E6005967CA /* IndexVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A358F0B31F65618000B1CFB5 /* sampleListFromBundle.plist in Resources */,
 				A31396B21F5F05E6005967CA /* IndexVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
