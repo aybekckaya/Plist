@@ -13,7 +13,6 @@ enum PlistSourcePath {
     case bundle
 }
 
-
 class Plist: NSObject {
     enum PlistError:Error {
         case couldNotFetchPlistContents
@@ -38,7 +37,7 @@ class Plist: NSObject {
     fileprivate var folderPath:String = "plists"
     
     var plistPath:String {
-         get{ return plistFullPath() }
+        get{ return plistFullPath() }
     }
     
     init(_name:String , _source:PlistSourcePath = .documentsDirectory , _folderPath:String = "plists") {
@@ -55,7 +54,7 @@ class Plist: NSObject {
         folderPath.createDir()
         let emptyDct = NSDictionary(dictionary: [:])
         emptyDct.write(toFile: fullPath, atomically: true)
- }
+    }
     
     private func plistFullPath()->String {
         return String.documentsDirectoryPath()+"/"+folderPath+"/"+name+".plist"
@@ -74,7 +73,7 @@ class Plist: NSObject {
         
     }
     
-    fileprivate func contents()->[String:Any]? {
+    func contents()->[String:Any]? {
         let path = plistFullPath()
         guard let dct = NSDictionary(contentsOfFile: path) as? [String: Any] else { return nil }
         return dct
@@ -94,42 +93,42 @@ class Plist: NSObject {
         DispatchQueue.global(qos: .background).async {
             (contentsList as NSDictionary).write(toFile: self.plistFullPath(), atomically: true)
             DispatchQueue.main.async {
-               completion(nil)
+                completion(nil)
+                
             }
         }
-       
+        
     }
     
     func read(key:String , completion:@escaping(_ data:[String:Any]? , _ error:Error?)->Void) {
-        
         DispatchQueue.global(qos: .background).async {
             let path = self.plistFullPath()
             guard let dct = NSDictionary(contentsOfFile: path) as? [String: Any] else {
-                DispatchQueue.main.async {
-                    completion(nil, PlistError.couldNotFetchPlistContents.errorComponent())
-                }
+                DispatchQueue.main.async { completion(nil, PlistError.couldNotFetchPlistContents.errorComponent()) }
                 return
             }
             guard let content = dct[key] as? String else {
-                DispatchQueue.main.async {
-                    completion(nil, nil)
-                }
+                DispatchQueue.main.async { completion(nil, nil) }
                 return
             }
             
             guard let json = content.decodeJSON() else {
                 completion(nil, PlistError.couldNotDecodeJson.errorComponent())
                 return
-                
             }
             completion(json, nil)
         }
-    
     }
     
-
+    func removeKey(key:String) {
+        guard var contents:[String:Any] = contents() else { return }
+        contents.removeValue(forKey: key)
+        (contents as NSDictionary).write(toFile: plistPath, atomically: true)
+    }
+    
+    
     func removePlist() {
-      
+        
         let fullPath:String = plistFullPath()
         guard fullPath.fileExistAtPath() else { return }
         fullPath.removeFile()
@@ -144,6 +143,7 @@ class Plist: NSObject {
     }
     
 }
+
 
 protocol JsonConvertible {
     func toJsonString()->String?
@@ -190,21 +190,19 @@ extension String {
         var isDir : ObjCBool = false
         if fileManager.fileExists(atPath: self, isDirectory:&isDir) {
             if isDir.boolValue {
-                // file exists and is a directory
                 return true
             } else {
-                // file exists and is not a directory
                 fatalError("String:\(self) is not a directory path")
             }
         }
-      return false
+        return false
     }
     
-   
+    
     
     func removeFile() {
         do {
-           try FileManager.default.removeItem(atPath: self)
+            try FileManager.default.removeItem(atPath: self)
         }catch {
             print("error : \(error.localizedDescription)")
         }
@@ -212,9 +210,9 @@ extension String {
     
     
     func allFilesInDirectory()->[String] {
-       
-         var documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-         documentsUrl.appendPathComponent(self)
+        
+        var documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        documentsUrl.appendPathComponent(self)
         var contents:[String] = []
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
@@ -240,6 +238,9 @@ extension String {
     }
     
 }
+
+
+
 
 
 
