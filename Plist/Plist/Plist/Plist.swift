@@ -8,15 +8,33 @@
 
 import UIKit
 
+
+/**
+   used to define the source path of plist.
+
+   **documentsDirectory** : plist will be created at device documents directory. Once it is created , it can be accessible from app's documents directory.
+   **bundle** : plist is at app's bundle. Once it is accessed , it will be directly copied to documents directory if it is not created before. After that it can be accessible from documents directory.
+ Note that : if plist source path is `bundle` and it has created before , then for reading and writing this class uses latest version which is at documents directory
+ */
 enum PlistSourcePath {
     case documentsDirectory
     case bundle
 }
 
 class Plist: NSObject {
+    
+    /**
+         Plist Errors that conforms Swift's Error protocol.
+     */
     enum PlistError:Error {
+        
+        // plist contents is null. So it can not be accessible.
         case couldNotFetchPlistContents
+        
+        // error occured while converting object to json string
         case couldNotConvertToJsonString
+        
+        // string is not a json , it cannot be decoded
         case couldNotDecodeJson
         
         func errorComponent()->Error {
@@ -32,22 +50,39 @@ class Plist: NSObject {
         
     }
     
+    // name of the plist file without extension
     fileprivate var name:String = ""
+    
+    // source path
     fileprivate var source:PlistSourcePath = .documentsDirectory
+    
+    // folder path of plist . Plist is at : /documentsFolder/folderPath/name.plist
     fileprivate var folderPath:String = "plists"
     
+    // plist path can be accessible , but it should not be settable
     var plistPath:String {
         get{ return plistFullPath() }
     }
     
+    /**
+     # Initializer
+     ## parameters :
+     **name** : name of the plist .
+     ** source** : from which source plist can be accessible (default : documents directory)
+     ** folder Path ** : plist folder at documents directory.
+     */
     init(_name:String , _source:PlistSourcePath = .documentsDirectory , _folderPath:String = "plists") {
         super.init()
         name = _name
         source = _source
         folderPath = _folderPath.replacingOccurrences(of: "/", with: "")
         source == .documentsDirectory ? createPlist() : copyFromBundle()
+      
     }
     
+    /**
+       creates plist if it is not exists.
+     */
     private func createPlist() {
         let fullPath:String = plistFullPath()
         guard !fullPath.fileExistAtPath() else { return }
@@ -60,6 +95,10 @@ class Plist: NSObject {
         return String.documentsDirectoryPath()+"/"+folderPath+"/"+name+".plist"
     }
     
+    /**
+        copy plist from bundle to /documentsDir/folderPath/
+        throws error if it cannot be created.
+     */
     private func copyFromBundle() {
         let fullname = name+".plist"
         guard !plistPath.fileExistAtPath() else { return }
@@ -73,12 +112,18 @@ class Plist: NSObject {
         
     }
     
+    /**
+       returns whole content of plist as a dictionary.
+     */
     func contents()->[String:Any]? {
         let path = plistFullPath()
         guard let dct = NSDictionary(contentsOfFile: path) as? [String: Any] else { return nil }
         return dct
     }
     
+    /**
+       saves json with key in async fashion.
+     */
     func save(key:String , data:Any , completion:@escaping (_ error:Error?)->Void) {
         guard var contentsList = contents() else {
             completion(PlistError.couldNotFetchPlistContents.errorComponent())
@@ -100,6 +145,10 @@ class Plist: NSObject {
         
     }
     
+    
+    /**
+        reads value with given key.
+     */
     func read(key:String , completion:@escaping(_ data:[String:Any]? , _ error:Error?)->Void) {
         DispatchQueue.global(qos: .background).async {
             let path = self.plistFullPath()
@@ -120,6 +169,9 @@ class Plist: NSObject {
         }
     }
     
+    /**
+      deletes the value with given key.
+     */
     func removeKey(key:String) {
         guard var contents:[String:Any] = contents() else { return }
         contents.removeValue(forKey: key)
@@ -127,13 +179,18 @@ class Plist: NSObject {
     }
     
     
+    /**
+      removes the plist file.
+     */
     func removePlist() {
-        
         let fullPath:String = plistFullPath()
         guard fullPath.fileExistAtPath() else { return }
         fullPath.removeFile()
     }
     
+    /**
+       lists all plist names that is at /documents/plistPath/
+     */
     static func allPlistFiles(directoryName:String)->[String] {
         let allFiles:[String] = directoryName.allFilesInDirectory()
         return allFiles.map{ $0.components(separatedBy: "/").last! }.filter{element in
@@ -198,14 +255,9 @@ extension String {
         return false
     }
     
-    
-    
     func removeFile() {
-        do {
-            try FileManager.default.removeItem(atPath: self)
-        }catch {
-            print("error : \(error.localizedDescription)")
-        }
+        do { try FileManager.default.removeItem(atPath: self)}
+        catch { print("error : \(error.localizedDescription)") }
     }
     
     
@@ -218,11 +270,8 @@ extension String {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
             contents = directoryContents.map{ $0.absoluteString }
             return contents
-        } catch  {
-            return contents
-        }
+        } catch  { return contents }
     }
-    
     
     func createDir() {
         guard !self.directoryExists() else { return }
@@ -230,11 +279,8 @@ extension String {
         let pt = self+"/"
         let dataPath = documentsDirectory.appendingPathComponent(pt)
         
-        do {
-            try FileManager.default.createDirectory(at: dataPath, withIntermediateDirectories: false, attributes: nil)
-        } catch let error as NSError {
-            print("Error creating directory: \(error.localizedDescription)")
-        }
+        do { try FileManager.default.createDirectory(at: dataPath, withIntermediateDirectories: false, attributes: nil) }
+        catch let error as NSError { print("Error creating directory: \(error.localizedDescription)") }
     }
     
 }
