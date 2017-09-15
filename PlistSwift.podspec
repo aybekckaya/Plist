@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PlistSwift'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Easy property list manager that is written in Swift 3'
  
   s.description      = <<-DESC
