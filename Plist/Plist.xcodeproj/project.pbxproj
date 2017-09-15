@@ -19,9 +19,9 @@
 		A31396B01F5F05E6005967CA /* IndexVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A31396AC1F5F05E6005967CA /* IndexVC.xib */; };
 		A31396B11F5F05E6005967CA /* IndexVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A31396AC1F5F05E6005967CA /* IndexVC.xib */; };
 		A31396B21F5F05E6005967CA /* IndexVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A31396AC1F5F05E6005967CA /* IndexVC.xib */; };
-		A31396B51F5F066E005967CA /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* Plist.swift */; };
-		A31396B61F5F066E005967CA /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* Plist.swift */; };
-		A31396B71F5F066E005967CA /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* Plist.swift */; };
+		A31396B51F5F066E005967CA /* PlistSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* PlistSwift.swift */; };
+		A31396B61F5F066E005967CA /* PlistSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* PlistSwift.swift */; };
+		A31396B71F5F066E005967CA /* PlistSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31396B41F5F066E005967CA /* PlistSwift.swift */; };
 		A358F0B11F65617F00B1CFB5 /* sampleListFromBundle.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */; };
 		A358F0B21F65618000B1CFB5 /* sampleListFromBundle.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */; };
 		A358F0B31F65618000B1CFB5 /* sampleListFromBundle.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */; };
@@ -59,7 +59,7 @@
 		A313969D1F5F0574005967CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A31396AB1F5F05E6005967CA /* IndexVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexVC.swift; sourceTree = "<group>"; };
 		A31396AC1F5F05E6005967CA /* IndexVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexVC.xib; sourceTree = "<group>"; };
-		A31396B41F5F066E005967CA /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
+		A31396B41F5F066E005967CA /* PlistSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistSwift.swift; sourceTree = "<group>"; };
 		A358F0B01F6559A200B1CFB5 /* sampleListFromBundle.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = sampleListFromBundle.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,7 +161,7 @@
 		A31396B31F5F0647005967CA /* Plist */ = {
 			isa = PBXGroup;
 			children = (
-				A31396B41F5F066E005967CA /* Plist.swift */,
+				A31396B41F5F066E005967CA /* PlistSwift.swift */,
 			);
 			path = Plist;
 			sourceTree = "<group>";
@@ -315,7 +315,7 @@
 			files = (
 				A31396AD1F5F05E6005967CA /* IndexVC.swift in Sources */,
 				A31396811F5F0574005967CA /* Plist.xcdatamodeld in Sources */,
-				A31396B51F5F066E005967CA /* Plist.swift in Sources */,
+				A31396B51F5F066E005967CA /* PlistSwift.swift in Sources */,
 				A31396791F5F0574005967CA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,7 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A31396B61F5F066E005967CA /* Plist.swift in Sources */,
+				A31396B61F5F066E005967CA /* PlistSwift.swift in Sources */,
 				A31396911F5F0574005967CA /* PlistTests.swift in Sources */,
 				A31396AE1F5F05E6005967CA /* IndexVC.swift in Sources */,
 			);
@@ -334,7 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A31396B71F5F066E005967CA /* Plist.swift in Sources */,
+				A31396B71F5F066E005967CA /* PlistSwift.swift in Sources */,
 				A313969C1F5F0574005967CA /* PlistUITests.swift in Sources */,
 				A31396AF1F5F05E6005967CA /* IndexVC.swift in Sources */,
 			);
